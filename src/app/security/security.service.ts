@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SecurityService {
-  baseUrl: string = environment.baseUrl;
+  baseUrl = environment.baseUrl;
 
   securityChanged = new Subject<boolean>();
   private user?: User;
