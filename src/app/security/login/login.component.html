@@ -1,0 +1,43 @@
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form
+      fxLayout="column row"
+      fxLayoutAlign="center center"
+      #f="ngForm"
+      (ngSubmit)="loginUser(f)">
+
+      <h2>Ingresa a Mi Banco</h2>
+
+      <mat-form-field>
+        <mat-label>RUT</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Ingrese su rut 16675738-k"
+          ngModel
+          name="rut"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Clave</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder="******"
+          ngModel
+          name="password"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <div class="input-wrapper-button">
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Ingresar</button>
+      </div>
+    </form>
+  </mat-card>
+
+</section>

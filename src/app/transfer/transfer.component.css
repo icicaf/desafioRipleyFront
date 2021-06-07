@@ -1,0 +1,10 @@
+h2 {
+  color: #53357d;
+}
+
+#btn-add {
+  right: 45px;
+  bottom: 45px;
+  left: auto;
+  position: absolute;
+}

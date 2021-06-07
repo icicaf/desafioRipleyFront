@@ -1,0 +1,70 @@
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form
+      fxLayout="column row"
+      fxLayoutAlign="center center"
+      #f="ngForm"
+      (ngSubmit)="registerUser(f)">
+
+      <h2>Formulario de registro</h2>
+
+      <mat-form-field>
+        <mat-label>RUT</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Ingrese su RUT"
+          ngModel
+          name="rut"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Ingrese su nombre"
+          ngModel
+          name="name"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Correo</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="Ingrese su correo electrónico"
+          ngModel
+          name="email"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Clave</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder="Ingrese su contraseña"
+          ngModel
+          name="password"
+          required
+        />
+        <mat-error>Campo requerido</mat-error>
+      </mat-form-field>
+
+      <div class="input-wrapper-button">
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Registrar</button>
+      </div>
+    </form>
+  </mat-card>
+
+</section>
+

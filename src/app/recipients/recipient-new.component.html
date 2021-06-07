@@ -1,0 +1,89 @@
+<form
+  #f="ngForm"
+  (ngSubmit)="saveRecipient(f)"
+>
+  <h2 mat-dialog-title>Nuevo destinatario</h2>
+  <mat-dialog-content>
+    <section fxLayoutAlign="center" style="margin-top: 10px; margin-bottom: 10px;">
+      <mat-card fxFlex="100%">
+        <div
+          fxLayout="column"
+          fxLayout="center"
+          fxLayoutGap="10px"
+        >
+          <table cellspacing="10">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>RUT</mat-label>
+                  <input type="text" matInput placeholder="ingrese RUT" name="rut" ngModel required>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Nombre</mat-label>
+                  <input type="text" matInput placeholder="ingrese nombre" name="name" ngModel required>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Correo</mat-label>
+                  <input type="text" matInput placeholder="ingrese correo" name="email" ngModel required>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Teléfono</mat-label>
+                  <input type="text" matInput placeholder="ingrese Teléfono" name="telephone" ngModel required>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Tipo de cuenta</mat-label>
+                    <mat-select [(ngModel)]="selectTypeAccount" name="typeAccount">
+                      <mat-option value="1">Cuenta vista</mat-option>
+                      <mat-option value="2">Cuenta corriente</mat-option>
+                    </mat-select>
+                    <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Seleccione Banco</mat-label>
+                  <mat-select [(ngModel)]="selectBank" name="bank" >
+                    <mat-option value="1">Banco Santander</mat-option>
+                    <mat-option value="2">Banco de Chile</mat-option>
+                  </mat-select>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>N° de cuenta</mat-label>
+                  <input type="text" matInput placeholder="ingrese N° de cuenta" name="numberAccount" ngModel required>
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+          </table>
+        </div>
+      </mat-card>
+    </section>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true">Cerrar</button>
+    <button mat-button type="submit">Guardar</button>
+  </mat-dialog-actions>
+
+</form>

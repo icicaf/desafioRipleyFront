@@ -1,0 +1,18 @@
+<h1>Nuevo Destinatario</h1>
+
+<form (ngSubmit)="saveRecipient(f)" #f="ngForm">
+  <input type="text" name="recipientName" ngModel required>
+  <!-- <input type="text" name="recipientRut" ngModel required>
+  <input type="text" name="recipientMail" ngModel required>
+  <input type="text" name="recipientNumber" ngModel required>
+  <input type="text" name="recipientBank" ngModel required>
+  <input type="text" name="recipientTypeAccount" ngModel required>
+  -->
+  <button type="submit">Crear</button>
+</form>
+
+<app-recipient
+  (recipientClicked)="deleteRecipient(recipient)"
+  *ngFor="let recipient of recipients"
+  [recipientName]="recipient">
+</app-recipient>
