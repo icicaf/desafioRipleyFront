@@ -10,10 +10,9 @@ import { SecurityService } from '../security.service';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private securityService: SecurityService) { }
+  constructor(private securityService: SecurityService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginUser(form: NgForm) {
     this.securityService.login({

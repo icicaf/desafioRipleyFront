@@ -1,7 +1,10 @@
-export interface Transfers {
-  name: string;
-  rut: string;
-  bank: string;
-  type: string;
-  ammount: number;
+export interface Transfer {
+  created_at: string;
+  customer_id: number;
+  transfer_bankDestinatary: string;
+  transfer_id: number;
+  transfer_nameDestinatary: string;
+  transfer_rutDestinatary:string;
+  transfer_totalAmountDestinatary:number;
+  transfer_typeAccountDestinatary:string;
 }

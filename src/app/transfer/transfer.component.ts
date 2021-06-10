@@ -1,24 +1,28 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TransferService } from './transfer.service';
-import { Transfers } from './transfer.model'
+import { Transfer } from './transfer.model'
 import { MatTableDataSource} from '@angular/material/table'
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
   styleUrls: ['./transfer.component.css']
 })
-export class TransferComponent implements OnInit, AfterViewInit {
-  transferData: Transfers[] = [];
+
+export class TransferComponent implements OnInit, OnDestroy {
+  transferData: Transfer[] = [];
   showColumns = ['name','rut','bank','type','ammount'];
-  dataSource = new MatTableDataSource<Transfers>();
+  dataSource = new MatTableDataSource<Transfer>();
   @ViewChild(MatSort) orderBy: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
-  constructor(private TransferService: TransferService, private dialog: MatDialog) {
+  private transferSubcriptions?: Subscription;
+
+  constructor(private transferService: TransferService, private dialog: MatDialog) {
     this.orderBy = new MatSort;
   }
 
@@ -27,12 +31,19 @@ export class TransferComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = this.TransferService.getTransfers();
+   this.transferService.getTransfers();
+   this.transferSubcriptions = this.transferService.getListener().subscribe( (transfers: Transfer[])=>{
+    this.dataSource.data = transfers;
+   })
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.orderBy;
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy() {
+    this.transferSubcriptions?.unsubscribe();
   }
 
   openDialog() {

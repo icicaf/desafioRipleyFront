@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { SecurityService } from '../../security/security.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { RecipientNewComponent } from '../../recipients/recipient-new.component';
+import { TransferComponent } from '../../transfer/transfer.component';
 
 @Component({
   selector: 'app-menu',
@@ -13,12 +13,10 @@ import { RecipientNewComponent } from '../../recipients/recipient-new.component'
 export class MenuComponent implements OnInit, OnDestroy {
   @Output() menuToggle = new EventEmitter<void>();
 
-  statusUser: boolean;
+  statusUser?: boolean;
   userSubscription?: Subscription;
 
-  constructor(private securityService: SecurityService, private dialog: MatDialog) {
-    this.statusUser=false;
-  }
+  constructor(private securityService: SecurityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.securityService.securityChanged.subscribe(status => {
@@ -39,8 +37,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    this.dialog.open(RecipientNewComponent,{
-      width:'60%'
-    });
+   // this.dialog.open(RecipientNewComponent,{
+   //   width:'40%'
+  //  });
   }
 }

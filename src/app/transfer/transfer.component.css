@@ -1,10 +1,5 @@
-h2 {
+h1{
+  padding-top: 10px;
+  margin-left: 100px;
   color: #53357d;
-}
-
-#btn-add {
-  right: 45px;
-  bottom: 45px;
-  left: auto;
-  position: absolute;
 }

@@ -11,12 +11,10 @@ import { Subscription } from 'rxjs';
 export class MenuListComponent implements OnInit, OnDestroy {
   @Output() menuToggle = new EventEmitter<void>();
 
-  statusUser: boolean;
+  statusUser?: boolean;
   userSubscription?: Subscription;
 
-  constructor(private securityService: SecurityService) {
-    this.statusUser = false;
-   }
+  constructor(private securityService: SecurityService) {}
 
   ngOnInit(): void {
     this.securityService.securityChanged.subscribe(status => {

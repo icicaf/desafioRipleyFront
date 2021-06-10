@@ -18,13 +18,13 @@
         Nueva Transferencia
       </li>
       <li *ngIf="statusUser">
-        <button type="submit" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);" (click)="openDialog()"><b>Nuevo destinatario</b></button>
+        <button routerLink="/recipients" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);" (click)="openDialog()"><b>Nuevo destinatario</b></button>
       </li>
       <li *ngIf="statusUser">
         <button type="submit" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);"><b>Transferir</b></button>
       </li>
       <li *ngIf="statusUser">
-        <button routerLink="/history" type="submit" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);"><b>Historial</b></button>
+        <button routerLink="/transfers" type="submit" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);"><b>Historial</b></button>
       </li>
       <li *ngIf="statusUser" (click)="logout()">
         <button type="submit" mat-raised-button style="background:#ffffff; color: rgb(0, 0, 0); margin-left: 100px;"><b>Salir</b></button>
