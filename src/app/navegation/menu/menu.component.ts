@@ -37,8 +37,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-   // this.dialog.open(RecipientNewComponent,{
-   //   width:'40%'
-  //  });
-  }
+    // this.dialog.open(RecipientNewComponent,{
+    //   width:'40%'
+   //  });
+   }
 }

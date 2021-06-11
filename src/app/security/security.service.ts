@@ -67,19 +67,23 @@ export class SecurityService {
     this.http.post<any>(this.baseUrl + 'api/customer/login', loginData)
       .subscribe((response) => {
         this.data = response;
-        const tempdata = this.data.data;
-        this.customer = {
-          customer_id: tempdata.customer_id,
-          customer_rut: tempdata.customer_rut,
-          customer_name: tempdata.customer_name,
-          customer_mail: tempdata.customer_mail,
-          token: response.token
-        };
+        if(this.data.login === true) {
+          const tempdata = this.data.data;
+          this.customer = {
+            customer_id: tempdata.customer_id,
+            customer_rut: tempdata.customer_rut,
+            customer_name: tempdata.customer_name,
+            customer_mail: tempdata.customer_mail,
+            token: response.token
+          };
 
-        this.securityChanged.next(true);
-        localStorage.setItem('token', response.token);
-        sessionStorage.setItem('customerId', this.customer.customer_id);
-        this.router.navigate(['/']);
+          this.securityChanged.next(true);
+          localStorage.setItem('token', response.token);
+          sessionStorage.setItem('customerId', this.customer.customer_id);
+          this.router.navigate(['/']);
+        } else {
+          this.router.navigate(['/login']);
+        }
     });
   }
 

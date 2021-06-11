@@ -21,7 +21,7 @@
     <mat-cell *matCellDef="let element">{{element.destinatary_name}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="mail">
-    <mat-header-cell *matHeaderCellDef>Correo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Correo</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.destinatary_mail}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="telephone">
@@ -29,11 +29,11 @@
     <mat-cell *matCellDef="let element">{{element.destinatary_telephone}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="bank">
-    <mat-header-cell *matHeaderCellDef>Banco</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Banco</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.destinatary_bank}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="typeAccount">
-  <mat-header-cell *matHeaderCellDef>Tipo de cuenta</mat-header-cell>
+  <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de cuenta</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.destinatary_typeAccount}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="numberAccount">
@@ -44,7 +44,7 @@
   <mat-row *matRowDef="let row, columns: showColumns"></mat-row>
 </mat-table>
 
-<mat-paginator [pageSize]="10" [pageSizeOptions]="[10,30,100]"></mat-paginator>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20]"></mat-paginator>
 
 <button mat-fab id="btn-add" (click)="openDialog()">
   <mat-icon>add</mat-icon>

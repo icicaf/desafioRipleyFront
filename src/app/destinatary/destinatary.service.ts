@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Destinatary } from './destinatary.model'
+import { Bank } from "./bank.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,30 +15,41 @@ export class DestinataryService {
   data:any={};
 
   private destinataryList: Destinatary[] = [];
-
   private destinatarySubject = new Subject<Destinatary[]>();
+
+  private banksList: Bank[] = [];
+  private banksSubject = new Subject<Bank[]>();
 
   constructor(private router: Router, private http: HttpClient) {}
 
   getDestinatary() {
-    console.log("customerId",sessionStorage.getItem('customerId'));
     this.http.get<Destinatary[]>(this.baseUrl + 'api/destinatary/'+this.customerId).subscribe((response) => {
-      console.log("getDestinatary",response);
       this.data = response;
-      const tempdata = this.data.data;
-      this.destinataryList = tempdata;
-      this.destinatarySubject.next([...this.destinataryList]);
+      if(this.data.data.length) {
+        const tempdata = this.data.data;
+        this.destinataryList = tempdata;
+        this.destinatarySubject.next([...this.destinataryList]);
+      } else {
+        this.destinatarySubject.next([]);
+      }
     });
-
     return this.destinataryList.slice();
   }
 
   saveDestinatary(destinatary: Destinatary): any {
-    console.log(destinatary);
-
     this.http.post(this.baseUrl + 'api/destinatary', destinatary)
-      .subscribe((response) =>{
-        this.destinatarySubject.next();
+      .subscribe((response) => {
+        this.data = response;
+        if(this.data.data.result) {
+          console.log("paso true");
+          const tempdata = this.data.data;
+          this.destinataryList = tempdata;
+          this.destinataryList.push(destinatary);
+          this.destinatarySubject.next([...this.destinataryList]);
+        } else {
+          console.log("paso pr false");
+          this.destinatarySubject.next([]);
+        }
     });
   }
 
@@ -45,8 +57,16 @@ export class DestinataryService {
     return this.destinatarySubject.asObservable();
   }
 
-  makeDestintary(transfer: Destinatary) {
+  getBanks() {
+    this.http.get<Bank[]>(this.baseUrl + 'api/bank')
+    .subscribe((response) => {
+      this.data = response;
+        this.banksList = response;
 
+        this.banksSubject.next([...this.banksList]);
+        return this.banksList;
+    });
+    return this.banksList.slice();
   }
 
 }

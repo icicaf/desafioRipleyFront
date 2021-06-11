@@ -1,28 +1,32 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
 import { DestinataryService } from './destinatary.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Bank } from './bank.model';
 
 @Component({
   selector: 'app-destinatary-new',
   templateUrl: './destinatary-new.component.html'
 })
-
-export class DestinataryNewComponent {
+export class DestinataryNewComponent implements OnInit {
   selectBank?: string;
   selectedBankText: string;
-
   selectTypeAccount: string;
   selectedTypeAccountText: string;
-
   customerId = sessionStorage.getItem('customerId');
+
+  banks: Bank[] = [];
 
   constructor(private destinataryService: DestinataryService, private dialogRef: MatDialog) {
     this.selectedTypeAccountText='';
     this.selectedBankText = '';
     this.selectTypeAccount = '';
+  }
+
+  ngOnInit() {
+    this.banks = this.destinataryService.getBanks();
   }
 
   selectedBank(event: MatSelectChange) {
@@ -43,7 +47,7 @@ export class DestinataryNewComponent {
         customer_id: this.customerId,
         created_at: ''
       });
-      this.dialogRef.closeAll()
+      this.dialogRef.closeAll();
     }
   }
 

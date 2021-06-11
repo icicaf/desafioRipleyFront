@@ -32,9 +32,8 @@ export class TransferComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
    this.transferService.getTransfers();
-   this.transferSubcriptions = this.transferService.getListener().subscribe( (transfers: Transfer[])=>{
-    this.dataSource.data = transfers;
-   })
+   this.transferSubcriptions = this.transferService.getListener()
+    .subscribe((transfers: Transfer[]) => {this.dataSource.data = transfers; });
   }
 
   ngAfterViewInit() {
@@ -49,5 +48,4 @@ export class TransferComponent implements OnInit, OnDestroy {
   openDialog() {
     //this.dialog.open();
   }
-
 }

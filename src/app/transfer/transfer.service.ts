@@ -23,11 +23,14 @@ export class TransferService{
     console.log("customerId",sessionStorage.getItem('customerId'));
 
     this.http.get<Transfer[]>(this.baseUrl + 'api/transfer/'+this.customerId).subscribe((response) => {
-      console.log("getTransferencias",response);
       this.data = response;
-      const tempdata = this.data.data;
-      this.trasfersList = tempdata;
-      this.transfersSubject.next([...this.trasfersList]);
+      if(!this.data.data) {
+        const tempdata = this.data.data;
+        this.trasfersList = tempdata;
+        this.transfersSubject.next([...this.trasfersList]);
+      } else {
+        this.transfersSubject.next([]);
+      }
     });
 
     return this.trasfersList.slice();
