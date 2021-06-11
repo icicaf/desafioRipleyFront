@@ -1,1 +1,69 @@
-<h1>Transferir</h1>
+<form
+  #f="ngForm"
+  (ngSubmit)="saveDestinatary(f)"
+>
+  <mat-dialog-content>
+    <section fxLayoutAlign="center">
+      <mat-card>
+        <div align="center">
+          <h2><mat-icon matSuffix>mode_edit</mat-icon>Transferir</h2>
+          <table cellspacing="20">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Buscar Destinatario</mat-label>
+                  <mat-select [(ngModel)]="selectDestinatary" name="destinatary" (selectionChange)="selectedDestinatary($event)">
+                    <mat-option *ngFor="let destinatarytr of recipients" value="destinatarytr.destinatary_id">
+                      {{destinatarytr.destinatary_name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="background-color:#ffb71cd0; width:100%;">
+          <div style="margin: 10px;" align="center">
+            <mat-form-field>
+              <mat-label>RUT</mat-label>
+              <input type="number" matInput name="rut" ngModel required disabled>
+            </mat-form-field>
+            <span style="padding-left: 50px;"></span>
+            <mat-form-field>
+              <mat-label>Correo</mat-label>
+              <input type="number" matInput name="mail" ngModel required disabled>
+            </mat-form-field>
+            <span style="padding-left: 50px;"></span>
+            <mat-form-field>
+              <mat-label>Banco</mat-label>
+              <input type="number" matInput name="bank" ngModel required disabled>
+            </mat-form-field>
+            <span style="padding-left: 50px;"></span>
+            <mat-form-field>
+              <mat-label>Tipo de cuenta</mat-label>
+              <input type="number" matInput name="typeAccount" ngModel required disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>N° de cuenta</mat-label>
+              <input type="number" matInput name="numberAccount" ngModel required disabled>
+            </mat-form-field>
+          </div>
+        </div>
+        <div align="center">
+          <mat-form-field>
+            <mat-label>Monto</mat-label>
+            <input type="number" matInput name="ammount" ngModel required>
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div align="center" style="padding-top: 20px;">
+          <mat-dialog-actions>
+            <button  mat-button type="submit" mat-raised-button color="primary">Transferir</button>
+          </mat-dialog-actions>
+        </div>
+      </mat-card>
+    </section>
+  </mat-dialog-content>
+</form>
+

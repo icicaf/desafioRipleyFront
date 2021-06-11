@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SecurityService {
-
   securityChanged = new Subject<boolean>();
   baseUrl = environment.baseUrl;
   private token: string;
@@ -19,18 +18,15 @@ export class SecurityService {
   data:any={};
 
   chargeUser(): void {
-    const tokenBrowser = localStorage.getItem('token');
+    console.log("chargeUser");
+    const tokenBrowser = sessionStorage.getItem('token');
     if (!tokenBrowser) {
       return;
     }
     this.token = tokenBrowser;
     this.securityChanged.next(true);
 
-    const data = {"customer_rut":"12","customer_password":"12"}
-    console.log('login');
-
-    this.http.post<Customer>(this.baseUrl + 'api/customer/login',data ).subscribe((response) => {
-      console.log('login respuesta', response);
+    this.http.get<Customer>(this.baseUrl + 'api/customer/').subscribe((response) => {
       this.token = response.token;
       this.data = response;
         const tempdata = this.data.data;
@@ -41,13 +37,13 @@ export class SecurityService {
           customer_mail: tempdata.customer_mail,
           token: response.token
         };
-        console.log('login',response.token);
-      this.securityChanged.next(true);
-      localStorage.setItem('token', response.token);
+        this.token = response.token;
+        this.securityChanged.next(true);
+        sessionStorage.setItem('token', response.token);
     });
   }
 
-  getToken() { return this.token;}
+  getToken(): string { return this.token;}
 
   constructor(private router: Router, private http: HttpClient) { this.token = '';}
 
@@ -55,8 +51,6 @@ export class SecurityService {
     this.http.post<{register: string}>(this.baseUrl + 'api/customer/register', customerRegister)
     .subscribe((response) => {
       if(response.register) {
-        this.securityChanged.next(true);
-
         this.router.navigate(['/login']);
       } else {
         console.log("Error al resgistrar");
@@ -64,9 +58,11 @@ export class SecurityService {
   }
 
   login(loginData: LoginData) {
-    this.http.post<any>(this.baseUrl + 'api/customer/login', loginData)
+    this.http
+      .post<any>(this.baseUrl + 'api/customer/login', loginData)
       .subscribe((response) => {
         this.data = response;
+        console.log(this.data)
         if(this.data.login === true) {
           const tempdata = this.data.data;
           this.customer = {
@@ -74,12 +70,12 @@ export class SecurityService {
             customer_rut: tempdata.customer_rut,
             customer_name: tempdata.customer_name,
             customer_mail: tempdata.customer_mail,
-            token: response.token
+            token: response.token,
           };
-
-          this.securityChanged.next(true);
-          localStorage.setItem('token', response.token);
+          sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('customerId', this.customer.customer_id);
+          this.token = response.token;
+          this.securityChanged.next(true);
           this.router.navigate(['/']);
         } else {
           this.router.navigate(['/login']);
@@ -91,7 +87,7 @@ export class SecurityService {
     this.customer = null as any;;
     this.securityChanged.next(false);
     sessionStorage.removeItem('customerId')
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 

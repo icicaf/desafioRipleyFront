@@ -20,9 +20,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SecurityInterceptor } from './security/security-interceptor';
 import { DestinataryNewComponent } from './destinatary/destinatary-new.component';
+import { TransferenceComponent } from './transfer/transference.component';
 
 @NgModule({
-  //Componentes web
+
   declarations: [
     AppComponent,
     LoginComponent,
@@ -31,9 +32,10 @@ import { DestinataryNewComponent } from './destinatary/destinatary-new.component
     MenuComponent,
     MenuListComponent,
     RegisterComponent,
-    DestinataryNewComponent
+    DestinataryNewComponent,
+    TransferenceComponent
   ],
-  // modulos y directivas
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,9 +45,9 @@ import { DestinataryNewComponent } from './destinatary/destinatary-new.component
     FlexLayoutModule,
     HttpClientModule
   ],
-  // servicios
+
   providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, TransferService, DestinataryService, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'} ],
-  // componente principal
+
   bootstrap: [AppComponent],
   entryComponents: [DestinataryNewComponent]
 })

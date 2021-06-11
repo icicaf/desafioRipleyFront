@@ -21,7 +21,6 @@ export class TransferService{
 
   getTransfers() {
     console.log("customerId",sessionStorage.getItem('customerId'));
-
     this.http.get<Transfer[]>(this.baseUrl + 'api/transfer/'+this.customerId).subscribe((response) => {
       this.data = response;
       if(!this.data.data) {

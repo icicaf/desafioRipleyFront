@@ -3,6 +3,18 @@
     <mat-icon>home</mat-icon>
     <span class="navegation-list-label">Mi Banco</span>
   </a>
+  <a mat-list-item routerLink="/recipients" (click)="onCloseMenu()" *ngIf="statusUser">
+    <mat-icon>*</mat-icon>
+    <span class="navegation-list-label">Nuevo Destinatario</span>
+  </a>
+  <a mat-list-item routerLink="/transference" (click)="onCloseMenu()" *ngIf="statusUser">
+    <mat-icon>*</mat-icon>
+    <span class="navegation-list-label">Transferir</span>
+  </a>
+  <a mat-list-item routerLink="/transfers" (click)="onCloseMenu()" *ngIf="statusUser">
+    <mat-icon>*</mat-icon>
+    <span class="navegation-list-label">Historial</span>
+  </a>
   <a mat-list-item routerLink="register" (click)="onCloseMenu()" *ngIf="!statusUser">
     <mat-icon>Resgistrate</mat-icon>
     <span class="navegation-list-label">Registrarse</span>

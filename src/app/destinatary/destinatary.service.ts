@@ -23,7 +23,8 @@ export class DestinataryService {
   constructor(private router: Router, private http: HttpClient) {}
 
   getDestinatary() {
-    this.http.get<Destinatary[]>(this.baseUrl + 'api/destinatary/'+this.customerId).subscribe((response) => {
+    this.http.get<Destinatary[]>(this.baseUrl + 'api/destinatary/'+this.customerId)
+    .subscribe((response) => {
       this.data = response;
       if(this.data.data.length) {
         const tempdata = this.data.data;
