@@ -4,8 +4,8 @@
 
 export const environment = {
   production: true,
-  //baseUrl: 'https://icicaf-backend.herokuapp.com/'
-  baseUrl: 'http://localhost:5000/'
+  baseUrl: 'https://icicaf-backend.herokuapp.com/'
+  //baseUrl: 'http://localhost:5000/'
 };
 
 /*
