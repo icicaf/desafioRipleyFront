@@ -8,4 +8,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 # Live Example 
 
-https://desafio-ripley-front-ruddy.vercel.app/login
+http://52.72.160.252/  -> AWS
+
+https://desafio-ripley-front-ruddy.vercel.app/login   ->  VERCEL
