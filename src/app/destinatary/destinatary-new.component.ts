@@ -29,7 +29,7 @@ export class DestinataryNewComponent implements OnInit {
     this.banks = this.destinataryService.getBanks();
   }
 
-  selectedBank(event: MatSelectChange) {
+  async selectedBank(event: MatSelectChange) {
     this.selectedBankText = (event.source.selected as MatOption).viewValue;
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { TransferService } from './transfer.service';
 import { Transfer } from './transfer.model'
 import { MatTableDataSource} from '@angular/material/table'
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./transfer.component.css']
 })
 
-export class TransferComponent implements OnInit, OnDestroy {
+export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
   transferData: Transfer[] = [];
   showColumns = ['name','rut','bank','type','ammount'];
   dataSource = new MatTableDataSource<Transfer>();
@@ -24,6 +24,7 @@ export class TransferComponent implements OnInit, OnDestroy {
 
   constructor(private transferService: TransferService, private dialog: MatDialog) {
     this.orderBy = new MatSort;
+    this.transferSubcriptions = new Subscription;
   }
 
   doFilter(filter: string) {
@@ -31,9 +32,10 @@ export class TransferComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-   this.transferService.getTransfers();
+   this.transferData = this.transferService.getTransfers();
    this.transferSubcriptions = this.transferService.getListener()
-    .subscribe((transfers: Transfer[]) => {this.dataSource.data = transfers; });
+   .subscribe((transfers: Transfer[]) => {
+     this.dataSource.data = transfers; });
   }
 
   ngAfterViewInit() {

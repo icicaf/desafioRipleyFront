@@ -63,7 +63,6 @@ export class DestinataryService {
     .subscribe((response) => {
       this.data = response;
         this.banksList = response;
-
         this.banksSubject.next([...this.banksList]);
         return this.banksList;
     });

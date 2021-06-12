@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit,Renderer2 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { MatSelectChange } from '@angular/material/select';
 import { Destinatary } from '../destinatary/destinatary.model';
 import { DestinataryService } from '../destinatary/destinatary.service';
-
+import { Transfer } from '../transfer/transfer.model';
+import { TransferService } from './transfer.service';
 @Component({
   selector: 'app-transference',
   templateUrl: './transference.component.html',
@@ -15,36 +14,54 @@ export class TransferenceComponent implements OnInit {
   selectedDestinataryText = '';
   customerId = sessionStorage.getItem('customerId');
 
-  recipients: Destinatary[] = [];
+  destinatary_rut: string = '';
+  destinatary_name: string = '';
+  destinatary_mail: string = '';
+  destinatary_bank: string = '';
+  destinatary_typeAccount: string = '';
+  destinatary_numberAccount: string = '';
 
-  constructor(private destinataryService: DestinataryService) {
+  recipients: Destinatary[] = [];
+  private transfer?: Transfer;
+
+  constructor(private destinataryService: DestinataryService, private transferService: TransferService, private renderer: Renderer2) {
     this.selectDestinatary='';
     this.selectedDestinataryText = '';
   }
 
-  ngOnInit() {
-    this.recipients = this.destinataryService.getDestinatary();
+  async ngOnInit() {
+    this.recipients = await this.destinataryService.getDestinatary();
   }
 
-  selectedDestinatary(event: MatSelectChange) {
-    this.selectedDestinataryText = (event.source.selected as MatOption).viewValue;
+  selectedDestinatary(event:any) {
+    this.selectedDestinataryText = (event.source.selected).value;
+    const id = (event.source.selected).value;
+    for(let i = 0; i < this.recipients.length; i++) {
+      if( id == this.recipients[i].destinatary_id) {
+        console.log(this.recipients[i].destinatary_id);
+        this.destinatary_rut = this.recipients[i].destinatary_rut;
+        this.destinatary_name = this.recipients[i].destinatary_name;
+        this.destinatary_mail = this.recipients[i].destinatary_mail;
+        this.destinatary_bank = this.recipients[i].destinatary_bank;
+        this.destinatary_typeAccount = this.recipients[i].destinatary_typeAccount;
+        this.destinatary_rut = this.recipients[i].destinatary_rut;
+        this.destinatary_numberAccount = this.recipients[i].destinatary_numberAccount;
+      }
+    }
   }
 
-  saveDestinatary(form: NgForm) {
-    console.log("transferencia");
+  saveTransfer(form: NgForm) {
     if(form.valid) {
-      this.destinataryService.saveDestinatary({
-        destinatary_id : '',
-        destinatary_bank: '',
-        destinatary_mail: form.value.mail,
-        destinatary_telephone: form.value.telephone,
-        destinatary_name: form.value.name,
-        destinatary_rut: form.value.rut,
-        destinatary_typeAccount: '',
-        destinatary_numberAccount: form.value.numberAccount,
-        customer_id: this.customerId,
-        created_at: ''
+      this.transferService.makeTransfer({
+        customer_id: Number(this.customerId),
+        transfer_bankDestinatary: this.destinatary_bank,
+        transfer_nameDestinatary: this.destinatary_name,
+        transfer_rutDestinatary: this.destinatary_rut,
+        transfer_totalAmountDestinatary: form.value.ammount,
+        transfer_typeAccountDestinatary: this.destinatary_numberAccount,
       });
+    } else {
+      console.log("incompleto")
     }
   }
 

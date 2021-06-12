@@ -34,7 +34,8 @@ export class DestinataryComponent implements OnInit, AfterViewInit ,OnDestroy {
 
   ngOnInit(): void {
    this.destinataryService.getDestinatary();
-   this.destinatarySubcriptions = this.destinataryService.getListener().subscribe( (destinatary: Destinatary[])=>{
+   this.destinatarySubcriptions = this.destinataryService.getListener()
+   .subscribe( (destinatary: Destinatary[])=>{
     this.dataSource.data = destinatary;
    })
   }
