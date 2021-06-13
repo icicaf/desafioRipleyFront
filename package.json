@@ -21,8 +21,12 @@
     "@angular/platform-browser": "~12.0.3",
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
+    "crypto-js": "^4.0.0",
+    "ng2-rut": "^0.3.2",
+    "ngx-webstorage": "^8.0.0",
     "now": "^21.0.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.0.17",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },

@@ -2,7 +2,6 @@ import { Component, OnInit,Renderer2 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Destinatary } from '../destinatary/destinatary.model';
 import { DestinataryService } from '../destinatary/destinatary.service';
-import { Transfer } from '../transfer/transfer.model';
 import { TransferService } from './transfer.service';
 @Component({
   selector: 'app-transference',
@@ -20,9 +19,9 @@ export class TransferenceComponent implements OnInit {
   destinatary_bank: string = '';
   destinatary_typeAccount: string = '';
   destinatary_numberAccount: string = '';
+  created_at: string = '';
 
   recipients: Destinatary[] = [];
-  private transfer?: Transfer;
 
   constructor(private destinataryService: DestinataryService, private transferService: TransferService, private renderer: Renderer2) {
     this.selectDestinatary='';
@@ -30,7 +29,7 @@ export class TransferenceComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.recipients = await this.destinataryService.getDestinatary();
+    this.recipients = await this.destinataryService.getRecipients();
   }
 
   selectedDestinatary(event:any) {
@@ -45,6 +44,7 @@ export class TransferenceComponent implements OnInit {
         this.destinatary_bank = this.recipients[i].destinatary_bank;
         this.destinatary_typeAccount = this.recipients[i].destinatary_typeAccount;
         this.destinatary_rut = this.recipients[i].destinatary_rut;
+        this.created_at = this.recipients[i].created_at;
         this.destinatary_numberAccount = this.recipients[i].destinatary_numberAccount;
       }
     }
@@ -58,10 +58,9 @@ export class TransferenceComponent implements OnInit {
         transfer_nameDestinatary: this.destinatary_name,
         transfer_rutDestinatary: this.destinatary_rut,
         transfer_totalAmountDestinatary: form.value.ammount,
-        transfer_typeAccountDestinatary: this.destinatary_numberAccount,
+        transfer_typeAccountDestinatary: this.destinatary_typeAccount,
+        created_at: ''
       });
-    } else {
-      console.log("incompleto")
     }
   }
 

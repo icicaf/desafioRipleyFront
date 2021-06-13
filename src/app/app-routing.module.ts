@@ -6,9 +6,11 @@ import { SecurityRouter } from './security/security.router';
 import { TransferComponent } from './transfer/transfer.component';
 import { TransferenceComponent } from './transfer/transference.component';
 import { DestinataryComponent } from './destinatary/destinatary.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '/', component:LoginComponent},
+  { path: '', component:LoginComponent },
+  { path: 'home', component:HomeComponent },
   { path: 'login', component:LoginComponent},
   { path: 'register', component:RegisterComponent },
   { path: 'transfers', component:TransferComponent, canActivate: [SecurityRouter]},

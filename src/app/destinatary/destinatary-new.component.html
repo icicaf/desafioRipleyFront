@@ -48,7 +48,7 @@
               <td>
                 <mat-form-field>
                   <mat-label>Tipo de cuenta</mat-label>
-                    <mat-select [(ngModel)]="selectTypeAccount" name="typeAccount" (selectionChange)="selectedTypeAccount($event)">
+                    <mat-select [(ngModel)]="selectTypeAccount" name="typeAccount" (selectionChange)="selectedTypeAccount($event)" ngModel required>
                       <mat-option value="Cuenta vista">Cuenta vista</mat-option>
                       <mat-option value="Cuenta corriente">Cuenta corriente</mat-option>
                     </mat-select>
@@ -58,7 +58,7 @@
               <td>
                 <mat-form-field>
                   <mat-label>Seleccione Banco</mat-label>
-                  <mat-select [(ngModel)]="selectBank" name="bank" (selectionChange)="selectedBank($event)">
+                  <mat-select [(ngModel)]="selectBank" name="bank" (selectionChange)="selectedBank($event)" ngModel required>
                     <mat-option *ngFor="let banktr of banks" value="banktr.name">
                       {{banktr.name}}
                     </mat-option>

@@ -21,6 +21,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SecurityInterceptor } from './security/security-interceptor';
 import { DestinataryNewComponent } from './destinatary/destinatary-new.component';
 import { TransferenceComponent } from './transfer/transference.component';
+import { HomeComponent } from './home/home.component';
+import { Ng2Rut } from 'ng2-rut'
 
 @NgModule({
 
@@ -33,7 +35,8 @@ import { TransferenceComponent } from './transfer/transference.component';
     MenuListComponent,
     RegisterComponent,
     DestinataryNewComponent,
-    TransferenceComponent
+    TransferenceComponent,
+    HomeComponent
   ],
 
   imports: [
@@ -43,7 +46,8 @@ import { TransferenceComponent } from './transfer/transference.component';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2Rut
   ],
 
   providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, TransferService, DestinataryService, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'} ],

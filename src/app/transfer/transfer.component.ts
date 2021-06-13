@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import {formatCurrency, getCurrencySymbol} from '@angular/common';
 
 @Component({
   selector: 'app-transfer',
@@ -34,8 +35,9 @@ export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
    this.transferData = this.transferService.getTransfers();
    this.transferSubcriptions = this.transferService.getListener()
-   .subscribe((transfers: Transfer[]) => {
-     this.dataSource.data = transfers; });
+    .subscribe((transfers: Transfer[]) => {
+     this.dataSource.data = transfers;
+    });
   }
 
   ngAfterViewInit() {
@@ -47,7 +49,13 @@ export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
     this.transferSubcriptions?.unsubscribe();
   }
 
-  openDialog() {
-    //this.dialog.open();
+  updateValue(value: string) {
+
+    let val = parseInt(value, 10);
+    if (Number.isNaN(val)) {
+      val = 0;
+    }
+    let cantidad;
+    return cantidad = formatCurrency(val, 'en-US', getCurrencySymbol('USD', 'wide'));
   }
 }

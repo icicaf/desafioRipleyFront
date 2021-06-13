@@ -13,7 +13,7 @@
                 <mat-form-field>
                   <mat-label>Buscar Destinatario</mat-label>
                   <mat-select [(ngModel)]="selectDestinatary" name="destinatary"
-                    (selectionChange)="selectedDestinatary($event)">
+                    (selectionChange)="selectedDestinatary($event)" ngModel required>
                     <mat-option *ngFor="let destinatarytr of recipients" value={{destinatarytr.destinatary_id}}>
                       {{destinatarytr.destinatary_name}}
                     </mat-option>

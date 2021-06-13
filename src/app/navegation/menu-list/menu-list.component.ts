@@ -7,17 +7,19 @@ import { Subscription } from 'rxjs';
   templateUrl: './menu-list.component.html',
   styleUrls: ['./menu-list.component.css']
 })
-
 export class MenuListComponent implements OnInit, OnDestroy {
   @Output() menuToggle = new EventEmitter<void>();
 
-  statusUser?: boolean;
-  userSubscription?: Subscription;
+  statusUser: boolean;
+  userSubscription: Subscription;
 
-  constructor(private securityService: SecurityService) {}
+  constructor(private securityService: SecurityService) {
+    this.statusUser = false;
+    this.userSubscription = new Subscription();
+  }
 
   ngOnInit(): void {
-    this.securityService.securityChanged.subscribe(status => {
+    this.securityService.securityChanged.subscribe( status => {
       this.statusUser = status;
     })
   }

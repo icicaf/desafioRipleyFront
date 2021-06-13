@@ -5,4 +5,5 @@ export interface Transfer {
   transfer_rutDestinatary:string;
   transfer_totalAmountDestinatary:number;
   transfer_typeAccountDestinatary:string;
+  created_at:string;
 }

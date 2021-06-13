@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import  Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +35,36 @@ export class TransferService{
   }
 
   makeTransfer(transference: Transfer) {
-    console.log("insertar transferencia");
-    this.http
-      .post<any>(this.baseUrl + 'api/transfer', transference)
-      .subscribe((response) => {
-        this.data = response;
-        console.log(this.data)
-    });
+    const validate = this.validateData(transference);
+    if(validate) {
+      this.http
+        .post<any>(this.baseUrl + 'api/transfer', transference)
+        .subscribe((response) => {
+          this.data = response;
+          if(this.data.transfer) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Transferencia realizada',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } else {
+
+          }
+          console.log(this.data)
+      });
+    } else {}
+  }
+
+  validateData(transference: Transfer) {
+    if(transference.customer_id > 0 && transference.transfer_bankDestinatary !== ''
+        && transference.transfer_nameDestinatary !== ''  && transference.transfer_rutDestinatary !== ''
+        && transference.transfer_totalAmountDestinatary > 0 && transference.transfer_typeAccountDestinatary !== '') {
+        return true;
+    } else {
+      return false;
+    }
   }
 
   getListener() {

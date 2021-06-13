@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import  Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,6 @@ export class SecurityService {
   data:any={};
 
   chargeUser(): void {
-    console.log("chargeUser");
     const tokenBrowser = sessionStorage.getItem('token');
     if (!tokenBrowser) {
       return;
@@ -53,16 +53,15 @@ export class SecurityService {
       if(response.register) {
         this.router.navigate(['/login']);
       } else {
-        console.log("Error al resgistrar");
+        //console.log("Error al resgistrar");
     }});
   }
 
   login(loginData: LoginData) {
     this.http
-      .post<any>(this.baseUrl + 'api/customer/login', loginData)
+    .post<any>(this.baseUrl + 'api/customer/login', loginData)
       .subscribe((response) => {
         this.data = response;
-        console.log(this.data)
         if(this.data.login === true) {
           const tempdata = this.data.data;
           this.customer = {
@@ -76,18 +75,33 @@ export class SecurityService {
           sessionStorage.setItem('customerId', this.customer.customer_id);
           this.token = response.token;
           this.securityChanged.next(true);
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en sus credenciales',
+            text: 'Si no esta registrado por favor registrar'
+          })
           this.router.navigate(['/login']);
         }
     });
   }
 
+  getFlagFirstVisit() :boolean {
+    if (sessionStorage.getItem('flagFirstVisit') === null) {
+      sessionStorage.setItem('flagFirstVisit', 'true');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   logout() {
-    this.customer = null as any;;
+    this.customer = null as any;
     this.securityChanged.next(false);
     sessionStorage.removeItem('customerId')
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('flagFirstVisit');
     this.router.navigate(['/login']);
   }
 

@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { SecurityService } from '../../security/security.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { TransferComponent } from '../../transfer/transfer.component';
 
 @Component({
   selector: 'app-menu',
@@ -35,10 +34,4 @@ export class MenuComponent implements OnInit, OnDestroy {
   logout() {
     this.securityService.logout();
   }
-
-  openDialog() {
-    // this.dialog.open(RecipientNewComponent,{
-    //   width:'40%'
-   //  });
-   }
 }
