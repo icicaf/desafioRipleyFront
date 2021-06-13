@@ -22,7 +22,6 @@ import { SecurityInterceptor } from './security/security-interceptor';
 import { DestinataryNewComponent } from './destinatary/destinatary-new.component';
 import { TransferenceComponent } from './transfer/transference.component';
 import { HomeComponent } from './home/home.component';
-import { Ng2Rut } from 'ng2-rut'
 
 @NgModule({
 
@@ -46,8 +45,7 @@ import { Ng2Rut } from 'ng2-rut'
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpClientModule,
-    Ng2Rut
+    HttpClientModule
   ],
 
   providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, TransferService, DestinataryService, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'} ],
