@@ -37,7 +37,6 @@ export class TransferenceComponent implements OnInit {
     const id = (event.source.selected).value;
     for(let i = 0; i < this.recipients.length; i++) {
       if( id == this.recipients[i].destinatary_id) {
-        console.log(this.recipients[i].destinatary_id);
         this.destinatary_rut = this.recipients[i].destinatary_rut;
         this.destinatary_name = this.recipients[i].destinatary_name;
         this.destinatary_mail = this.recipients[i].destinatary_mail;
@@ -61,6 +60,15 @@ export class TransferenceComponent implements OnInit {
         transfer_typeAccountDestinatary: this.destinatary_typeAccount,
         created_at: ''
       });
+      this.destinatary_rut = '';
+      this.destinatary_name = '';
+      this.destinatary_mail = '';
+      this.destinatary_bank = '';
+      this.destinatary_typeAccount = '';
+      this.destinatary_rut = '';
+      this.created_at = '';
+      this.destinatary_numberAccount = '';
+      form.reset();
     }
   }
 

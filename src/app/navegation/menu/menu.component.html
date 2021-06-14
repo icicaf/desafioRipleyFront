@@ -5,7 +5,7 @@
   <div fxFlex fxLayout fxLayoutAlign="center" fxHide.xs>
     <ul fxLayout="row" class="navegation-menu" fxLayoutGap="20px">
       <li>
-          <a routerLink="/">
+          <a routerLink="/home">
             <span>
               Mi Banco
             </span>
@@ -25,6 +25,8 @@
       </li>
       <li *ngIf="statusUser">
         <button routerLink="/transfers" type="submit" mat-raised-button style="background:#ffb81c; color: rgb(0, 0, 0);"><b>Historial</b></button>
+      </li>
+      <li *ngIf="statusUser">
       </li>
       <li *ngIf="statusUser" (click)="logout()">
         <button type="submit" mat-raised-button style="background:#ffffff; color: rgb(0, 0, 0); margin-left: 100px;"><b>Salir</b></button>

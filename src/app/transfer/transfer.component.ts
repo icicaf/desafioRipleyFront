@@ -6,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import {formatCurrency, getCurrencySymbol} from '@angular/common';
 
 @Component({
   selector: 'app-transfer',
@@ -16,7 +15,7 @@ import {formatCurrency, getCurrencySymbol} from '@angular/common';
 
 export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
   transferData: Transfer[] = [];
-  showColumns = ['name','rut','bank','type','ammount'];
+  showColumns = ['name','rut','bank','type','created_at','ammount'];
   dataSource = new MatTableDataSource<Transfer>();
   @ViewChild(MatSort) orderBy: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
@@ -47,15 +46,5 @@ export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.transferSubcriptions?.unsubscribe();
-  }
-
-  updateValue(value: string) {
-
-    let val = parseInt(value, 10);
-    if (Number.isNaN(val)) {
-      val = 0;
-    }
-    let cantidad;
-    return cantidad = formatCurrency(val, 'en-US', getCurrencySymbol('USD', 'wide'));
   }
 }

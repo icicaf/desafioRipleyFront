@@ -40,6 +40,8 @@ export class SecurityService {
         this.token = response.token;
         this.securityChanged.next(true);
         sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('customerId', this.customer.customer_id);
+        sessionStorage.setItem('customerName', this.customer.customer_name);
     });
   }
 
@@ -73,6 +75,7 @@ export class SecurityService {
           };
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('customerId', this.customer.customer_id);
+          sessionStorage.setItem('customerName', this.customer.customer_name);
           this.token = response.token;
           this.securityChanged.next(true);
           this.router.navigate(['/home']);
@@ -99,7 +102,8 @@ export class SecurityService {
   logout() {
     this.customer = null as any;
     this.securityChanged.next(false);
-    sessionStorage.removeItem('customerId')
+    sessionStorage.removeItem('customerId');
+    sessionStorage.removeItem('customerName');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('flagFirstVisit');
     this.router.navigate(['/login']);

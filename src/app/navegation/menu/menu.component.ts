@@ -19,8 +19,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.securityService.securityChanged.subscribe(status => {
-      this.statusUser = status;
-    })
+      this.statusUser = status});
   }
 
   onMenuToggleDispatch() {

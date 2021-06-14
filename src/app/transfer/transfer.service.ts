@@ -50,9 +50,14 @@ export class TransferService{
               timer: 1500
             })
           } else {
-
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Error al transferir',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
-          console.log(this.data)
       });
     } else {}
   }

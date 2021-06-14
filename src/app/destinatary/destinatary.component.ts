@@ -34,9 +34,7 @@ export class DestinataryComponent implements OnInit, AfterViewInit ,OnDestroy {
 
   ngOnInit(): void {
    this.destinataryService.getDestinatary();
-   this.destinatarySubcriptions = this.destinataryService.getListener()
-   .subscribe( (destinatary: Destinatary[])=>{
-    this.dataSource.data = destinatary;
+   this.destinatarySubcriptions = this.destinataryService.getListener().subscribe( (destinatary: Destinatary[])=>{this.dataSource.data = destinatary;
    })
   }
 
@@ -50,7 +48,7 @@ export class DestinataryComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   openDialog(){
-    const dialogRef = this.dialog.open(DestinataryNewComponent, {
+    this.dialog.open(DestinataryNewComponent, {
       width: '40%',
     });
   }

@@ -42,7 +42,7 @@
         <div align="center">
           <mat-form-field>
             <mat-label>Monto</mat-label>
-            <input #ammount type="number" matInput name="ammount" ngModel required>
+            <input #ammount type="number" matInput name="ammount" min="1" pattern="^[0-9]+" ngModel required>
             <mat-error>Campo requerido</mat-error>
           </mat-form-field>
         </div>
