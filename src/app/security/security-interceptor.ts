@@ -9,12 +9,10 @@ export class SecurityInterceptor implements HttpInterceptor {
   constructor(private SecurityService: SecurityService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const tokenSecurityService = this.SecurityService.getToken();
+    const tokenSecurity = this.SecurityService.getToken();
     const request = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer '+ tokenSecurityService),
+      headers: req.headers.set('Authorization', 'Bearer '+ tokenSecurity),
     });
-
-    console.log(request);
 
     return next.handle(request);
   }

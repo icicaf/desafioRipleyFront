@@ -26,7 +26,9 @@ export class DestinataryNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.banks = this.destinataryService.getBanks();
+    this.destinataryService.getBanks().subscribe( result => {
+      this.banks = result;
+    });
   }
 
   selectedBank(event: MatSelectChange) {

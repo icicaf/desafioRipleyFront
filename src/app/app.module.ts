@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './material.module';
@@ -22,9 +20,9 @@ import { SecurityInterceptor } from './security/security-interceptor';
 import { DestinataryNewComponent } from './destinatary/destinatary-new.component';
 import { TransferenceComponent } from './transfer/transference.component';
 import { HomeComponent } from './home/home.component';
+import { SecurityService } from './security/security.service';
 
 @NgModule({
-
   declarations: [
     AppComponent,
     LoginComponent,
@@ -37,7 +35,6 @@ import { HomeComponent } from './home/home.component';
     TransferenceComponent,
     HomeComponent
   ],
-
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,10 +44,9 @@ import { HomeComponent } from './home/home.component';
     FlexLayoutModule,
     HttpClientModule
   ],
-
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, TransferService, DestinataryService, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'} ],
-
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, SecurityService, TransferService, DestinataryService, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'} ],
   bootstrap: [AppComponent],
   entryComponents: [DestinataryNewComponent]
 })
+
 export class AppModule { }

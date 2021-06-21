@@ -47,9 +47,10 @@ export class DestinataryComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.destinatarySubcriptions.unsubscribe();
   }
 
-  openDialog(){
-    this.dialog.open(DestinataryNewComponent, {
-      width: '40%',
+  openDialog() {
+    console.log("se abre formulario nuevo destinatorio");
+    this.dialog.open(DestinataryNewComponent,  {
+      width: '100%',
     });
   }
 

@@ -1,8 +1,10 @@
-import { Component, OnInit,Renderer2 } from '@angular/core';
+import { ConditionalExpr } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Destinatary } from '../destinatary/destinatary.model';
 import { DestinataryService } from '../destinatary/destinatary.service';
 import { TransferService } from './transfer.service';
+import  Swal from 'sweetalert2'
 @Component({
   selector: 'app-transference',
   templateUrl: './transference.component.html',
@@ -23,13 +25,31 @@ export class TransferenceComponent implements OnInit {
 
   recipients: Destinatary[] = [];
 
-  constructor(private destinataryService: DestinataryService, private transferService: TransferService, private renderer: Renderer2) {
+  constructor(private destinataryService: DestinataryService, private transferService: TransferService) {
     this.selectDestinatary='';
     this.selectedDestinataryText = '';
   }
 
-  async ngOnInit() {
-    this.recipients = await this.destinataryService.getRecipients();
+  ngOnInit() {
+    this.destinataryService.getRecipient().subscribe( result => {
+      this.recipients = result.data;
+    });
+
+    if(this.recipients) {
+      Swal.fire({
+        title: '<strong>Advertencia</strong>',
+        icon: 'info',
+        html: 'No tienes ningun destinatario en tu lista, por favor registra uno para continuar',
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: 'Cerrar',
+        confirmButtonText: 'Ir a crear destinatario',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.destinataryService.goToDestinatary();
+        }
+      })
+    }
   }
 
   selectedDestinatary(event:any) {

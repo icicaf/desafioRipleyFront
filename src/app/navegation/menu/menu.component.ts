@@ -8,18 +8,16 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-
 export class MenuComponent implements OnInit, OnDestroy {
   @Output() menuToggle = new EventEmitter<void>();
 
-  statusUser?: boolean;
+  statusUser!: boolean;
   userSubscription?: Subscription;
 
   constructor(private securityService: SecurityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.securityService.securityChanged.subscribe(status => {
-      this.statusUser = status});
+    this.securityService.securityChanged.subscribe(status => {this.statusUser = status});
   }
 
   onMenuToggleDispatch() {

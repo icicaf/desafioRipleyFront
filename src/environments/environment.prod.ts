@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://icicaf-backend.herokuapp.com/'
+  baseUrl: 'http://icicaf-backend.herokuapp.com/'
 };

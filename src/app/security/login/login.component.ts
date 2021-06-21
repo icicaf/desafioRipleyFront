@@ -1,18 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SecurityService } from '../security.service';
 import  Swal from 'sweetalert2'
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent implements OnInit {
 
-export class LoginComponent implements OnInit, OnDestroy {
-
-  constructor(private router: Router, private securityService: SecurityService) {}
+  constructor(private securityService: SecurityService) {}
 
   ngOnInit(): void {
     if (this.securityService.getFlagFirstVisit()) {
@@ -27,7 +25,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 }

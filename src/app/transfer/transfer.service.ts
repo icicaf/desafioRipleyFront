@@ -3,7 +3,6 @@ import { Subject } from "rxjs"
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import  Swal from 'sweetalert2'
 
 @Injectable({
@@ -11,17 +10,15 @@ import  Swal from 'sweetalert2'
 })
 export class TransferService{
   baseUrl = environment.baseUrl;
-  customerId = sessionStorage.getItem('customerId');
   data:any={};
 
   private trasfersList: Transfer[] = [];
-
   private transfersSubject = new Subject<Transfer[]>();
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getTransfers() {
-    this.http.get<Transfer[]>(this.baseUrl + 'api/transfer/'+this.customerId).subscribe((response) => {
+    this.http.get<Transfer[]>(this.baseUrl + 'api/transfer/'+ localStorage.getItem('customerId')).subscribe((response) => {
       this.data = response;
       if(this.data.data.length) {
         const tempdata = this.data.data;

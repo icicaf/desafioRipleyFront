@@ -14,13 +14,14 @@ import { Subscription } from 'rxjs';
 })
 
 export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
-  transferData: Transfer[] = [];
-  showColumns = ['name','rut','bank','type','created_at','ammount'];
-  dataSource = new MatTableDataSource<Transfer>();
   @ViewChild(MatSort) orderBy: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
-  private transferSubcriptions?: Subscription;
+  transferData: Transfer[] = [];
+  showColumns = ['name','rut','bank','type','created_at','ammount'];
+  dataSource = new MatTableDataSource<Transfer>();
+
+  private transferSubcriptions: Subscription;
 
   constructor(private transferService: TransferService, private dialog: MatDialog) {
     this.orderBy = new MatSort;
@@ -45,6 +46,6 @@ export class TransferComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.transferSubcriptions?.unsubscribe();
+    this.transferSubcriptions.unsubscribe();
   }
 }
